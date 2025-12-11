@@ -36,9 +36,10 @@ except ImportError:
 app = Flask(__name__)
 CORS(app)  # Enable CORS for frontend requests
 
-# Configuration
-MODEL_PATH = os.environ.get('MODEL_PATH', 'models/model.keras')
-SCALER_PATH = os.environ.get('SCALER_PATH', 'models/scaler.pkl')
+# Configuration - Look for models in parent directory's models folder (project root)
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+MODEL_PATH = os.environ.get('MODEL_PATH', os.path.join(BASE_DIR, 'models', 'model.keras'))
+SCALER_PATH = os.environ.get('SCALER_PATH', os.path.join(BASE_DIR, 'models', 'scaler.pkl'))
 EXPECTED_TIME_STEPS = 684  # Expected number of time steps
 EXPECTED_FEATURES = 4  # Current, Voltage, Resistance, Force
 
